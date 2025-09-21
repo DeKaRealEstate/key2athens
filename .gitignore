@@ -1,5 +1,15 @@
-# Node.js
+# Node.js dependencies
 node_modules/
-npm-debug.log
-yarn-error.log
+npm-debug.log*
+yarn-error.log*
+
+# Environment variables
 .env
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
