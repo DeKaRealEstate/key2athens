@@ -1,67 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Key2Athens – Win a Renovated Apartment in Athens!</title>
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Key2Athens - Κλήρωση Ακινήτου στην Αθήνα</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <style>
+    .progress-container {
+      background-color: #eee;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 20px;
+      margin-bottom: 1rem;
+    }
+    .progress-bar {
+      height: 100%;
+      background-color: #0d6efd;
+      width: 41%;
+      transition: width 0.5s ease-in-out;
+    }
+    nav a {
+      font-weight: bold;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-  <main class="container">
-    <h1>Key2Athens</h1>
-    <section>
-      <h2>Win a Renovated Apartment in Athens</h2>
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Apartment in Athens" style="max-width:100%;border-radius:8px;">
-      <p>Buy a €20 ticket for your chance to win a fully renovated apartment in the city of Athens! Our crowdfunding lottery makes real estate dreams possible.</p>
-      <ul>
-        <li>Location: Central Athens, Greece</li>
-        <li>Type: 2-bedroom, 60m², fully renovated</li>
-        <li>Lottery Ticket: €20</li>
-      </ul>
-    </section>
-    <section>
-      <h3>Funding Progress</h3>
-      <progress value="40" max="100"></progress>
-      <p>40% funded – <strong>400</strong> of 1,000 tickets sold</p>
-    </section>
-    <section>
-      <h3>Register for the Lottery</h3>
-      <form id="regForm">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Email address" required>
-        <button type="submit">Buy Ticket</button>
-      </form>
-      <div id="regStatus"></div>
-    </section>
-    <section>
-      <h3>Recent Registrants</h3>
-      <ul id="recentList"></ul>
-    </section>
-  </main>
-  <script>
-    document.getElementById('regForm').addEventListener('submit', async e => {
-      e.preventDefault();
-      const form = e.target;
-      const data = { name: form.name.value, email: form.email.value };
-      const res = await fetch('/register', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(data)
-      });
-      const result = await res.json();
-      document.getElementById('regStatus').textContent = result.success ? 'Registered!' : result.message;
-      form.reset();
-      loadRegistrants();
-    });
 
-    async function loadRegistrants() {
-      const res = await fetch('/registrants');
-      const registrants = await res.json();
-      const list = document.getElementById('recentList');
-      list.innerHTML = registrants.map(r => `<li>${r.name} (${r.email})</li>`).join('');
-    }
-    window.onload = loadRegistrants;
-  </script>
+  <!-- Navigation -->
+  <nav class="container-fluid">
+    <ul>
+      <li><strong>Key2Athens</strong></li>
+    </ul>
+    <ul>
+      <li><a href="#hero">Αρχική</a></li>
+      <li><a href="#how-it-works">Πώς Λειτουργεί</a></li>
+      <li><a href="#apartment">Το Διαμέρισμα</a></li>
+      <li><a href="#progress">Πρόοδος</a></li>
+      <li><a href="#faq">Ερωτήσεις</a></li>
+      <li><a href="#register" role="button">Συμμετοχή</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Hero Section -->
+    <section id="hero">
+      <h1>Απόκτησε το Δικό σου Σπίτι στην Αθήνα με Μόνο 20€</h1>
+      <p>Πάρε μέρος στην κλήρωση για ένα πλήρως ανακαινισμένο διαμέρισμα στο κέντρο της Αθήνας.</p>
+      <a href="#how-it-works" role="button">Πώς Λειτουργεί</a>
+      <a href="#register" role="button" class="secondary">Συμμετοχή Τώρα</a>
+    </section>
+
+    <hr />
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+      <h2>Πώς Λειτουργεί</h2>
+      <ol>
+        <li>Αγοράζεις ένα εισιτήριο με 20€</li>
+        <li>Αγοράζουμε και ανακαινίζουμε διαμέρισμα στο κέντρο της Αθήνας</li>
+        <li>Μόλις συμπληρωθούν 10.000 εισιτήρια, γίνεται η δημόσια κλήρωση</li>
+        <li>Ο νικητής γίνεται ο νόμιμος ιδιοκτήτης του ακινήτου</li>
+      </ol>
+    </section>
+
+    <hr />
+
+    <!-- Apartment Info -->
+    <section id="apartment">
+      <h2>Το Διαμέρισμα</h2>
+      <p>Το ακίνητο βρίσκεται σε κεντρικό σημείο της Αθήνας και θα παραδοθεί πλήρως ανακαινισμένο.</p>
+      <ul>
+        <li>🛏️ 2 Υπνοδωμάτια</li>
+        <li>🛁 1 Μπάνιο</li>
+        <li>🏛️ 10 λεπτά με τα πόδια από την Ακρόπολη</li>
+      </ul>
+      <figure>
+        <img src="https://via.placeholder.com/1200x800?text=Apartment+Photo" alt="Ακίνητο στην Αθήνα" />
+        <figcaption>Ενδεικτική εικόνα διαμερίσματος</figcaption>
+      </figure>
+    </section>
+
+    <hr />
+
+    <!-- Funding Progress -->
+    <section id="progress">
+      <h2>Πρόοδος Χρηματοδότησης</h2>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 41%;"></div>
+      </div>
+      <p><strong>€82,000</strong> από €200,000</p>
+    </section>
+
+    <hr />
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2>Συχνές Ερωτήσεις</h2>
+      <details>
+        <summary>Είναι νόμιμο αυτό;</summary>
+        <p>Ναι. Η διαδικασία συμμορφώνεται με τους ευρωπαϊκούς κανόνες για crowdfunding και διαγωνισμούς. Όροι χρήσης και πλήρης διαφάνεια θα είναι διαθέσιμα πριν την έναρξη.</p>
+      </details>
+      <details>
+        <summary>Τι γίνεται αν δεν πουληθούν όλα τα εισιτήρια;</summary>
+        <p>Εάν δεν επιτευχθεί ο στόχος, τα χρήματα θα διαχειριστούν με απόλυτη διαφάνεια — είτε επιστρέφονται, είτε μεταφέρονται σε επόμενη κλήρωση κατόπιν ενημέρωσης.</p>
+      </details>
+    </section>
+
+    <hr />
+
+    <!-- Register -->
+    <section id="register">
+      <h2>Συμμετοχή</h2>
+      <p>Συμπλήρωσε τα στοιχεία σου για να εκδηλώσεις ενδιαφέρον. (Το σύστημα αγοράς εισιτηρίων θα ενεργοποιηθεί σύντομα.)</p>
+      <form>
+        <input type="text" name="name" placeholder="Όνομα" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <button type="submit">Συμμετοχή</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="container">
+    <small>
+      &copy; 2025 Key2Athens • 
+      <a href="#">Όροι Χρήσης</a> • 
+      <a href="#">Πολιτική Απορρήτου</a> • 
+      <a href="#hero">Αρχή Σελίδας</a>
+    </small>
+  </footer>
+
 </body>
 </html>
