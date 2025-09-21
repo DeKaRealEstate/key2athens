@@ -2,66 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Key2Athens – Win a Renovated Apartment in Athens!</title>
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key2Athens Demo</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="container">
-    <h1>Key2Athens</h1>
-    <section>
-      <h2>Win a Renovated Apartment in Athens</h2>
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Apartment in Athens" style="max-width:100%;border-radius:8px;">
-      <p>Buy a €20 ticket for your chance to win a fully renovated apartment in the city of Athens! Our crowdfunding lottery makes real estate dreams possible.</p>
-      <ul>
-        <li>Location: Central Athens, Greece</li>
-        <li>Type: 2-bedroom, 60m², fully renovated</li>
-        <li>Lottery Ticket: €20</li>
-      </ul>
-    </section>
-    <section>
-      <h3>Funding Progress</h3>
-      <progress value="40" max="100"></progress>
-      <p>40% funded – <strong>400</strong> of 1,000 tickets sold</p>
-    </section>
-    <section>
-      <h3>Register for the Lottery</h3>
-      <form id="regForm">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Email address" required>
-        <button type="submit">Buy Ticket</button>
-      </form>
-      <div id="regStatus"></div>
-    </section>
-    <section>
-      <h3>Recent Registrants</h3>
-      <ul id="recentList"></ul>
-    </section>
+    <img src="apartment.jpg" alt="Apartment" width="100%" />
+    <h1>Welcome to Key2Athens</h1>
+    <p>Your modern Athens apartment solution. Register now for exclusive deals!</p>
+    <form id="registerForm">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <button type="submit">Register</button>
+    </form>
+    <div id="regStatus"></div>
   </main>
-  <script>
-    document.getElementById('regForm').addEventListener('submit', async e => {
-      e.preventDefault();
-      const form = e.target;
-      const data = { name: form.name.value, email: form.email.value };
-      const res = await fetch('/register', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(data)
-      });
-      const result = await res.json();
-      document.getElementById('regStatus').textContent = result.success ? 'Registered!' : result.message;
-      form.reset();
-      loadRegistrants();
-    });
-
-    async function loadRegistrants() {
-      const res = await fetch('/registrants');
-      const registrants = await res.json();
-      const list = document.getElementById('recentList');
-      list.innerHTML = registrants.map(r => `<li>${r.name} (${r.email})</li>`).join('');
-    }
-    window.onload = loadRegistrants;
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
