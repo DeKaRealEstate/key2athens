@@ -1,0 +1,1 @@
+{"name":"key2athens","version":"1.0.0","description":"Real estate lottery crowdfunding platform for Athens apartment.","main":"server.js","scripts":{"start":"node server.js"},"dependencies":{"express":"^4.18.2"}}
